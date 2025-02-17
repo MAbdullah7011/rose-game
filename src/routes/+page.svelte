@@ -41,11 +41,10 @@
     }
   }
   
-  // Update rose growth progress
   
 </script>
   
-  
+
 <div class="max-w-sm md:max-w-2xl 2xl:max-w-4xl mx-auto">
   <!-- Header -->
   <div class="text-center space-y-12 my-8">
@@ -53,19 +52,19 @@
     
     <p>Daily Roses Sent: {dailyRosesSent}/{maxDailyRoses}</p>
   </div>
-  <Tabs bind:value={group} >
+  <Tabs bind:value={group} listClasses="justify-center md:justify-normal">
     {#snippet list()}
       <Tabs.Control value="grow">Grow</Tabs.Control>
       <Tabs.Control value="garden">Garden</Tabs.Control>
       <Tabs.Control value="achievements">Achievements</Tabs.Control>
     {/snippet}
     {#snippet content()}
-      <Tabs.Panel value="grow">
+      <Tabs.Panel value="grow" >
         <div class="bg-white rounded-lg p-2 pb-12 md:p-6 md:pb-12 shadow-lg mb-8">
           
-            <div class="flex gap-7 ">
-              <h5 class="h5  text-primary-300 mb-4">Grow new rose</h5>
-              <p class="text-surface-200 text-sm font-semibold p-1 antialiased ">tap on an empty slot to start growing</p>
+            <div class="flex mb-4 gap-5 md:gap-7 items-center">
+              <h5 class="h5  text-primary-300 ">Grow new rose</h5>
+              <p class="text-surface-200 text-sm font-semibold  antialiased ">tap on an empty slot to start growing</p>
             </div>
           
           
@@ -126,16 +125,16 @@
         </div>
         
         <!-- Collection -->
-        <div class="bg-white rounded-lg p-6 shadow-lg min-h-56">
-          <div class="flex gap-7">
-            <h5 class="h5 text-primary-300 mb-4">Your Inventory</h5>
+        <div class="bg-white rounded-lg p-2 pb-12 md:p-6 md:pb-12 shadow-lg min-h-56">
+          <div class="flex gap-5 md:gap-7 mb-4 items-center">
+            <h5 class="h5 text-primary-300 ">Your Inventory</h5>
             {#if roseCollection.length!==0}
               <p class="text-surface-200 text-sm font-semibold p-1 antialiased ">select a rose to send</p>
 
             {/if}
           </div>
           {#if roseCollection.length==0}
-              <p class="text font-bold text-surface-400 text-center mt-12">so empty...</p>
+              <p class="text font-bold text-surface-200 text-center mt-12">so empty...</p>
             {/if}
           <div class="flex flex-wrap gap-4">
             {#each roseCollection as rose (rose.id)}
@@ -150,7 +149,7 @@
               </Popover.Trigger>
               <Popover.Content trapFocus={false} >
                 <div class="space-y-1">
-                  <Textarea bind:value={rose.note} placeholder="Add a note" />
+                  <Textarea bind:value={rose.note} placeholder="Add a note (optional)" maxlength={80} />
                   <div class="flex justify-end"><button onclick={()=>{sendRose(rose)}} type="button" class="btn btn-md preset-filled-primary-500 ">Send</button></div>
                 </div>
               </Popover.Content>
