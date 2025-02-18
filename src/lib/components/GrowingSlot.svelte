@@ -33,7 +33,7 @@ function updateValue() {
 
 {#if !isGrowing}
   <button onclick={startGrowingRose}>
-    <div  class="border-2   p-4 w-28 h-28 flex items-center justify-center rounded-lg border-dashed border-gray-300 hover:border-primary-300">
+    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-dashed border-gray-300 hover:border-primary-300">
         <RoseIconGrey ></RoseIconGrey>
     
     </div>

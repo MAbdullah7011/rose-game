@@ -3,6 +3,7 @@ import type { Config } from "tailwindcss";
 import tailwindcssAnimate from "tailwindcss-animate";
 import { skeleton, contentPath } from '@skeletonlabs/skeleton/plugin';
 import * as themes from '@skeletonlabs/skeleton/themes';
+
 const config: Config = {
 	darkMode: ["class"],
 	content: ["./src/**/*.{html,js,svelte,ts}",contentPath(import.meta.url, 'svelte')],
@@ -93,7 +94,7 @@ const config: Config = {
 	},
 	plugins: [tailwindcssAnimate,skeleton({
         // NOTE: each theme included will increase the size of your CSS bundle
-        themes: [ themes.nosh ,]
+        themes: [ themes.nosh ]
     })],
 };
 

@@ -9,7 +9,7 @@
 
 
 
-<div class="flex flex-wrap gap-3 content-start border min-h-96 rounded-lg p-4  bg-gradient-to-br from-green-50 to-rose-50" >
+<div class="flex flex-wrap gap-3 content-start border min-h-96 rounded-lg p-4 relative  bg-gradient-to-br from-green-50 to-rose-50" >
   {#each gardenCollection as rose (rose.id)}
     
     {#if rose.note.length > 0}
