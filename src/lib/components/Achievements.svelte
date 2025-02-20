@@ -1,21 +1,55 @@
 <script lang=ts>
-    let achievements:String[] = ['Achievement 1', 'Achievement 2', 'Achievement 3', 'Achievement 4', 'Achievement 5'];
+	
+
+     let Achievements = [
+    {
+        name: 'New Beginnings',
+        desc: 'Send your first flower to the garden',
+        progress: 0,
+        required: 1
+        
+    },
+    {
+        name: 'Budding Garden',
+        desc: 'Garden has 10 flowers',
+        progress: 0,
+        required: 10
+    },
+    {
+        name: 'Expert Grower',
+        desc: 'Grow 10 flowers',
+        progress: 0,
+        required: 10
+    },
+    {
+        name: 'Flourishing Garden',
+        desc: 'Garden has 100 flowers',
+        progress: 0,
+        required: 10
+    }
+
+    ]
 </script>
 
 
-<div class="card preset-filled-surface-50-950 border-[1px] border-surface-200-800 w-full max-w-full h-screen p-4 text-center">
-    <div class="space-y-10 p-3 ">
-        {#each achievements as achievement}
-            
-            <div class="flex gap-10 p-2 items-center justify-center">
-                <div>
-                    <p>{achievement}</p>
-                    description
-                </div>
-                <progress class="progress max-w-lg" value="50" max="100"></progress>
+<div class="card preset-filled-surface-50-950 border-[1px] border-surface-200-800 w-full max-w-full h-screen p-20 space-y-10">
+    
+    
+    {#each Achievements as achievement}
+    
+        <div>
+            <div >
+                <h6 class="h6">{achievement.name}</h6>
+                <p >{achievement.desc}</p>
             </div>
-            
-            
-        {/each}
-    </div>
+    
+            <span>
+                <progress class="progress max-w-lg " value="{achievement.progress}" max="{achievement.required}"></progress>
+                {achievement.progress/achievement.required*100}%
+            </span>
+        </div>
+    
+    {/each}
+    
+    
 </div>

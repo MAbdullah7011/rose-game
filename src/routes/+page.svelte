@@ -12,6 +12,7 @@
   let group = $state('grow');
   // State management
   let totalRoses = 0;
+  let textShake = $state(false);
   let gardenCollection = $state([])
   let roseCollection = $state([]);
   let dailyRosesSent = $state(0);
@@ -25,9 +26,16 @@
     roseCollection = [...roseCollection, event.detail]
   }
   
+  function triggerShakeAnimation() {
+    textShake = true;
+    setTimeout(() => {
+      textShake = false;
+    }, 1000);
+    console.log('reached') // Reset after animation duration
+  }
   // Send a rose to your partner
   
-  export function sendRose(rose) {
+   function sendRose(rose) {
     if (dailyRosesSent < maxDailyRoses) {
       // Remove from growing roses
       
@@ -39,6 +47,8 @@
       // Add to collection
       gardenCollection = [...gardenCollection, rose];
       roseCollection = roseCollection.filter(obj => obj.id !== rose.id);
+    }else{
+      triggerShakeAnimation()
     }
   }
   
@@ -51,7 +61,9 @@
   <div class="text-center space-y-12 my-8">
     <h1 class="h1 text-primary-300">Our Rose Garden</h1>
     
-    <p>Daily Roses Sent: {dailyRosesSent}/{maxDailyRoses}</p>
+    <div class='{textShake?"text-error-700 shake":""}'>
+      <p>Daily Roses Sent: {dailyRosesSent}/{maxDailyRoses}</p>
+    </div>
   </div>
   <Tabs bind:value={group} listClasses="justify-center md:justify-normal">
     {#snippet list()}
@@ -65,7 +77,7 @@
           
             <div class="flex mb-4 gap-4 md:gap-7 items-center">
               <h5 class="h5  text-primary-300 ">Grow new rose</h5>
-              <p class="text-surface-200 text-sm font-semibold ">tap on an empty slot to start growing</p>
+              <p class="text-surface-200-800 text-sm font-semibold ">tap on an empty slot to start growing</p>
             </div>
           
           
@@ -130,7 +142,7 @@
           <div class="flex gap-5 md:gap-7 mb-4 items-center">
             <h5 class="h5 text-primary-300 ">Your Inventory</h5>
             {#if roseCollection.length!==0}
-              <p class="text-surface-200 text-sm font-semibold p-1 antialiased ">select a rose to send</p>
+              <p class="text-surface-200-800 text-sm font-semibold p-1 antialiased ">select a rose to send</p>
 
             {/if}
           </div>
@@ -175,4 +187,30 @@
   <!-- Growing Area -->
   
 </div>
+
+
+<style>
   
+
+  .shake {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  @keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+</style>
