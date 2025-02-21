@@ -60,7 +60,7 @@
 </script>
   
 
-<div class="max-w-sm md:max-w-2xl 2xl:max-w-4xl mx-auto">
+<div class="max-w-sm md:max-w-2xl 2xl:max-w-4xl mx-auto pb-5">
   <!-- Header -->
   <div class="text-center space-y-12 my-8">
     <h1 class="h1 text-primary-300">Our Rose Garden</h1>
@@ -69,11 +69,12 @@
       <p>Daily Roses Sent: {dailyRosesSent}/{maxDailyRoses}</p>
     </div>
   </div>
-  <Tabs bind:value={group} listClasses="justify-center md:justify-normal">
+  <Tabs bind:value={group} listClasses="justify-center md:justify-normal" ><!-- add listGap=0 to reduce gap between tabs -->
     {#snippet list()}
       <Tabs.Control value="grow">Grow</Tabs.Control>
       <Tabs.Control value="garden">Garden</Tabs.Control>
       <Tabs.Control value="achievements">Achievements</Tabs.Control>
+      <!-- <Tabs.Control value="settings">Settings</Tabs.Control> -->
     {/snippet}
     {#snippet content()}
       <Tabs.Panel value="grow" >
@@ -158,7 +159,7 @@
             <Popover.Root>
               <Popover.Trigger>
                 
-                  <div  class="border-2    p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid  border-primary-300 hover:border-primary-500  " transition:scale>
+                  <div  class="border-2    p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid  border-primary-300 hover:border-primary-500 hover:bg-gray-50 " transition:scale>
                     <img class="" width="64" height="64" src={rose.type.path} alt="">
                   
                   </div>
@@ -166,6 +167,7 @@
               </Popover.Trigger>
               <Popover.Content trapFocus={false} side="top">
                 <div class="space-y-1">
+                  <p>{rose.type.name}</p>
                   <Textarea bind:value={rose.note} placeholder="Add a note (optional)" maxlength={80} />
                   <div class="flex justify-end"><button onclick={()=>{sendRose(rose)}} type="button" class="btn btn-md preset-filled-primary-500 ">Send</button></div>
                 </div>
@@ -186,6 +188,9 @@
       <Tabs.Panel value="achievements">
         <Achievements/>
       </Tabs.Panel>
+      <!-- <Tabs.Panel value="settings">
+
+      </Tabs.Panel> -->
     {/snippet}
   </Tabs>
   <!-- Growing Area -->

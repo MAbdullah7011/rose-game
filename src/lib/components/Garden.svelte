@@ -16,7 +16,7 @@
     
     <Popover.Root>
       <Popover.Trigger>
-        <img  class="h-fit hover:border" width="64" height="64" src={rose.type.path} alt="">
+        <img  class="h-fit border border-transparent hover:drop-shadow-lg hover:border-0" width="64" height="64" src={rose.type.path} alt="">
       </Popover.Trigger>
       <Popover.Content side=top>
         <div >

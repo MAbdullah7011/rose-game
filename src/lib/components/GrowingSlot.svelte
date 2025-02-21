@@ -3,6 +3,8 @@
   import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import RoseIconGrey from "./RoseIconGrey.svelte";
   import { roseTypes } from "$lib/roseTypes";
+  import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+  
   let isGrowing = $state(false)
   let rose = $state({});
   let growthInterval = $state();
@@ -63,24 +65,35 @@ function updateProgress() {
 
 {#if !isGrowing}
   <button onclick={startGrowingRose}>
-    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-dashed border-gray-300 hover:border-primary-300">
+    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-dashed border-gray-300 hover:border-primary-300 ">
         <RoseIconGrey ></RoseIconGrey>
 
     </div>
   </button>
   {:else}
   {#if rose.progress==100}
+    
     <button onclick={updateValue}>
-      <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-primary-300 hover:border-primary-500 ">
+      <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-primary-300 hover:border-primary-500 hover:bg-gray-50">
         <img class="" width="64" height="64" src={rose.type.path} alt="">
       
       </div>
     </button>
     {:else}
-    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
-      <img class="" width="64" height="64" src={rose.type.path} alt="">
-      <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
-    </div>
+    <Tooltip.Provider>
+      <Tooltip.Root delayDuration={100}>
+        <Tooltip.Trigger>
+          <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
+            <img class="" width="64" height="64" src={rose.type.path} alt="">
+            <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
+          </div>
+        </Tooltip.Trigger>
+        <Tooltip.Content >
+          <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
+        </Tooltip.Content>
+      </Tooltip.Root>
+    </Tooltip.Provider>
+    
   {/if}
 {/if}
 
