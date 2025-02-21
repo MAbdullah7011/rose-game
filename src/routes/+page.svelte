@@ -1,4 +1,4 @@
-<script>
+<script >
   import { fade, scale } from 'svelte/transition';
   import { onMount } from 'svelte';
   import { Tabs } from '@skeletonlabs/skeleton-svelte';
@@ -7,6 +7,9 @@
 	import GrowPlaceholder from '$lib/components/GrowingSlot.svelte';
 	import Garden from '$lib/components/Garden.svelte';
 	import Achievements from '$lib/components/Achievements.svelte';
+  
+  
+
   
   
   let group = $state('grow');
@@ -47,6 +50,7 @@
       // Add to collection
       gardenCollection = [...gardenCollection, rose];
       roseCollection = roseCollection.filter(obj => obj.id !== rose.id);
+      
     }else{
       triggerShakeAnimation()
     }
