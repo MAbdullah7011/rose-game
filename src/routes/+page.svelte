@@ -158,7 +158,7 @@
             <Popover.Root>
               <Popover.Trigger>
                 
-                  <div  class="border-2    p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid  border-primary-600  " transition:scale>
+                  <div  class="border-2    p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid  border-primary-300 hover:border-primary-500  " transition:scale>
                     <img class="" width="64" height="64" src={rose.type.path} alt="">
                   
                   </div>

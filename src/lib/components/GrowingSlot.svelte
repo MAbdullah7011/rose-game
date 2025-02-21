@@ -71,13 +71,13 @@ function updateProgress() {
   {:else}
   {#if rose.progress==100}
     <button onclick={updateValue}>
-      <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-primary-300 ">
+      <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-primary-300 hover:border-primary-500 ">
         <img class="" width="64" height="64" src={rose.type.path} alt="">
       
       </div>
     </button>
     {:else}
-    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-200 relative">
+    <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
       <img class="" width="64" height="64" src={rose.type.path} alt="">
       <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
     </div>
