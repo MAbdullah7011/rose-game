@@ -51,8 +51,6 @@
       gardenCollection = [...gardenCollection, rose];
       roseCollection = roseCollection.filter(obj => obj.id !== rose.id);
       
-    }else{
-      triggerShakeAnimation()
     }
   }
   
@@ -157,7 +155,7 @@
           <div class="flex flex-wrap gap-3 md:gap-4">
             {#each roseCollection as rose (rose.id)}
             <Popover.Root>
-              <Popover.Trigger>
+              <Popover.Trigger onclick={()=>{(dailyRosesSent>4)&&triggerShakeAnimation()}}>
                 
                   <div  class="border-2    p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid  border-primary-300 hover:border-primary-500 hover:bg-gray-50 " transition:scale>
                     <img class="" width="64" height="64" src={rose.type.path} alt="">
@@ -168,8 +166,8 @@
               <Popover.Content trapFocus={false} side="top">
                 <div class="space-y-1">
                   <p>{rose.type.name}</p>
-                  <Textarea bind:value={rose.note} placeholder="Add a note (optional)" maxlength={80} />
-                  <div class="flex justify-end"><button onclick={()=>{sendRose(rose)}} type="button" class="btn btn-md preset-filled-primary-500 ">Send</button></div>
+                  <Textarea disabled={dailyRosesSent>4} bind:value={rose.note} placeholder="Add a note (optional)" maxlength={80} />
+                  <div class="flex justify-end"><button disabled={dailyRosesSent>4} onclick={()=>{sendRose(rose)}} type="button" class="btn btn-md preset-filled-primary-500 ">Send</button></div>
                 </div>
               </Popover.Content>
             </Popover.Root>

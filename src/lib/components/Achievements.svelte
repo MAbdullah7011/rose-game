@@ -32,7 +32,7 @@
 </script>
 
 
-<div class="card preset-filled-surface-50-950 border-[1px] border-surface-200-800 place-items-center h-fit p-20 space-y-10">
+<div class="card preset-filled-surface-50-950 border-[1px] border-surface-200-800 place-items-center h-fit p-20 space-y-16">
     
     
     {#each Achievements as achievement}
