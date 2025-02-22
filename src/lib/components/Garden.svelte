@@ -1,8 +1,6 @@
 <script>
-  import * as Popover from "$lib/components/ui/popover/index.js";
   
-	
-  
+  import { Popover } from "bits-ui";
   let {gardenCollection} = $props();
   let total = $derived(gardenCollection.length)
 
@@ -14,17 +12,18 @@
   {#each gardenCollection as rose (rose.id)}
     
     
-    <Popover.Root>
+    <Popover.Root >
       <Popover.Trigger>
         <img  class="h-fit border border-transparent hover:drop-shadow-lg hover:border-0" width="64" height="64" src={rose.type.path} alt="">
       </Popover.Trigger>
-      <Popover.Content side=top>
+      <Popover.Content  side="top" sideOffset={10} align="start" class="w-56 bg-card border rounded-md p-3 drop-shadow-lg" avoidCollisions={false}>
         <div >
           <div>{rose.type.name}</div>
           <div class="text-surface-400 font-bold text-sm">sent by you</div>
           <div class="text-sm text-surface-500 "> {rose.note.length>0?rose.note:"no note"}</div>
           
         </div>
+        <Popover.Arrow class="text-card"></Popover.Arrow>
       </Popover.Content>
     </Popover.Root>
       

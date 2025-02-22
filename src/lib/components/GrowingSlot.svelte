@@ -1,10 +1,15 @@
 <script>
+  import { MediaQuery } from 'svelte/reactivity';
 	import { createEventDispatcher, onMount } from 'svelte'
   import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import RoseIconGrey from "./RoseIconGrey.svelte";
   import { roseTypes } from "$lib/roseTypes";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
+  import * as Popover from "$lib/components/ui/popover/index.js";
+  const isTouch = new MediaQuery('any-hover: none', false);
+
   
+  //psuedo backend logic
   let isGrowing = $state(false)
   let rose = $state({});
   let growthInterval = $state();
@@ -27,7 +32,6 @@
       }
       function stopGrowing() {
   
-  // Clear the interval when we stop growing
   if (growthInterval) {
     clearInterval(growthInterval);
     growthInterval = null;
@@ -80,19 +84,33 @@ function updateProgress() {
       </div>
     </button>
     {:else}
-    <Tooltip.Provider>
-      <Tooltip.Root delayDuration={100}>
-        <Tooltip.Trigger>
+    {#if isTouch.current}
+      <Popover.Root>
+        <Popover.Trigger>
           <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
             <img class="" width="64" height="64" src={rose.type.path} alt="">
             <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
           </div>
-        </Tooltip.Trigger>
-        <Tooltip.Content >
+        </Popover.Trigger>
+        <Popover.Content side='top' class="w-fit">
           <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
-        </Tooltip.Content>
-      </Tooltip.Root>
-    </Tooltip.Provider>
+        </Popover.Content>
+      </Popover.Root>
+      {:else}
+      <Tooltip.Provider>
+        <Tooltip.Root delayDuration={100}>
+          <Tooltip.Trigger>
+            <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
+              <img class="" width="64" height="64" src={rose.type.path} alt="">
+              <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
+            </div>
+          </Tooltip.Trigger>
+          <Tooltip.Content >
+            <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
+          </Tooltip.Content>
+        </Tooltip.Root>
+      </Tooltip.Provider>
+    {/if}
     
   {/if}
 {/if}
