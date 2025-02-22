@@ -6,10 +6,8 @@
   import { roseTypes } from "$lib/roseTypes";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
   import * as Popover from "$lib/components/ui/popover/index.js";
-  
+  let canHover = $state(false);
 
-
-  
   //psuedo backend logic
   let isGrowing = $state(false)
   let rose = $state({});
@@ -58,6 +56,7 @@ function updateProgress() {
   }
   
   onMount(() => {
+  canHover = window.matchMedia('(hover: hover)').matches;
   return () => {
     if (growthInterval) {
       clearInterval(growthInterval);
@@ -85,33 +84,35 @@ function updateProgress() {
       </div>
     </button>
     {:else}
-    {#if !(window.matchMedia('(hover: hover)').matches)}
-      <Popover.Root>
-        <Popover.Trigger>
-          <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
-            <img class="" width="64" height="64" src={rose.type.path} alt="">
-            <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
-          </div>
-        </Popover.Trigger>
-        <Popover.Content side='top' class="w-fit">
-          <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
-        </Popover.Content>
-      </Popover.Root>
-      {:else}
-      <Tooltip.Provider>
-        <Tooltip.Root delayDuration={100}>
-          <Tooltip.Trigger>
+    
+      {#if !canHover}
+        <Popover.Root>
+          <Popover.Trigger>
             <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
               <img class="" width="64" height="64" src={rose.type.path} alt="">
               <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
             </div>
-          </Tooltip.Trigger>
-          <Tooltip.Content >
+          </Popover.Trigger>
+          <Popover.Content side='top' class="w-fit">
             <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
-          </Tooltip.Content>
-        </Tooltip.Root>
-      </Tooltip.Provider>
-    {/if}
+          </Popover.Content>
+        </Popover.Root>
+        {:else}
+        <Tooltip.Provider>
+          <Tooltip.Root delayDuration={100}>
+            <Tooltip.Trigger>
+              <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
+                <img class="" width="64" height="64" src={rose.type.path} alt="">
+                <Progress classes='absolute -bottom-5'  value={rose.progress} max={100} meterBg="bg-primary-500 " />
+              </div>
+            </Tooltip.Trigger>
+            <Tooltip.Content >
+              <p>{Math.round(rose.type.growthTime-((rose.progress*rose.type.growthTime)/100))} seconds left</p>
+            </Tooltip.Content>
+          </Tooltip.Root>
+        </Tooltip.Provider>
+      {/if}
+    
     
   {/if}
 {/if}
