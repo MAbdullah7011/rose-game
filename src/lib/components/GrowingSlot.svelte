@@ -1,12 +1,13 @@
 <script>
-  import { MediaQuery } from 'svelte/reactivity';
+  
 	import { createEventDispatcher, onMount } from 'svelte'
   import { Progress } from '@skeletonlabs/skeleton-svelte';
 	import RoseIconGrey from "./RoseIconGrey.svelte";
   import { roseTypes } from "$lib/roseTypes";
   import * as Tooltip from "$lib/components/ui/tooltip/index.js";
   import * as Popover from "$lib/components/ui/popover/index.js";
-  const isTouch = new MediaQuery('any-hover: none', false);
+  
+
 
   
   //psuedo backend logic
@@ -84,7 +85,7 @@ function updateProgress() {
       </div>
     </button>
     {:else}
-    {#if isTouch.current}
+    {#if !(window.matchMedia('(hover: hover)').matches)}
       <Popover.Root>
         <Popover.Trigger>
           <div  class="border-2  p-4 w-28 h-28 flex items-center justify-center rounded-lg border-solid border-secondary-300 relative">
