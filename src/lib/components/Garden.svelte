@@ -39,7 +39,7 @@
           i
         </span>
       </Popover.Trigger>
-      <Popover.Content side="left" sideOffset={-24} align="start"  avoidCollisions={false}>
+      <Popover.Content class="w-fit leading-tight text-base tracking-tight  bg-card border rounded-md p-3 drop-shadow-lg" side="left" sideOffset={-24} align="start"  avoidCollisions={false}>
         <p>Total Roses: {total}</p>
         <p>Sent by you: {total}</p>
         <p>Sent by them: 0</p>
